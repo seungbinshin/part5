@@ -42,7 +42,7 @@ Mac의 연결된 Chromium 브라우저에서 로컬 서버로 확인했다.
 
 화면 기록: [데스크톱](qa/part5-desktop.jpg), [모바일](qa/part5-mobile.jpg), [실습 결과](qa/part5-practice.jpg).
 
-## 세 사례로 제한한 로컬 추가본 검증
+## 세 사례로 제한한 추가본 검증
 
 같은 확인일의 최신 요청에 따라 GPU CCWS·SWL, HexaHarness, DRAM ATLAS 세 사례만 남겼다. 이 절의 검증 대상은 강의안과 사례 요약이며 원본 프로젝트의 재실행 결과가 아니다.
 
@@ -57,10 +57,10 @@ Mac의 연결된 Chromium 브라우저에서 로컬 서버로 확인했다.
 
 화면: [세 사례 데스크톱](qa/part5-projects-desktop.jpg), [모바일](qa/part5-projects-mobile.jpg), [ATLAS 상세](qa/part5-projects-mobile-detail.jpg).
 
-이 추가본은 사용자 요청에 따라 로컬에만 준비했다. 원격 push·visibility·Pages·공동작업자 설정 변경은 하지 않았다.
+로컬 검증을 마친 이 추가본의 GitHub 게시 승인을 받았다. 게시 과정에서도 저장소 가시성·Pages·공동작업자 설정은 변경하지 않는다.
 
 ## 실행하지 않은 항목
 
 실제 모델 호출·결제·새 인증·긴 훈련·운영 Wiki 갱신은 수행하지 않았다. 모델 응답 품질, 비용, 지연, 학습 시간과 연구 생산성 개선은 측정하지 않았다. 예상 학습시간과 사전 작성 답은 각각 그 사실을 표시했다.
 
-GitHub 저장소 게시와 웹 호스팅은 별개다. 이번 추가본의 원격 게시와 Pages 구성은 수행하지 않았다.
+GitHub 저장소 게시와 웹 호스팅은 별개다. 이 저장소에는 Pages 배포가 구성되어 있지 않아 전체 자료를 내려받아 브라우저에서 연다.

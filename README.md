@@ -4,7 +4,7 @@ Part 4까지 완료한 AI Wiki를 전제로 하는 한국어 정적 강의안입
 
 개인 프로젝트 사례는 필수 실습과 분리한 선택 읽기입니다. GPU CCWS·SWL 실험, HexaHarness, DRAM ATLAS 세 사례를 짧은 카드로 보고 관심 있는 과정만 펼칩니다. 과거 보고와 미확인 결과, AI DRAM Wiki에 적용할 제안을 구분했습니다. 원본 프로젝트를 이번에 재실행하거나 성능을 측정한 자료는 아닙니다.
 
-기존 게시 저장소: [seungbinshin/part5](https://github.com/seungbinshin/part5). 현재 세 사례 추가본은 사용자 지시에 따라 로컬에서만 준비했으며 원격에 게시하지 않았습니다. [강의안 파일](https://github.com/seungbinshin/part5/blob/main/index.html)과 [전사문 파일](https://github.com/seungbinshin/part5/blob/main/transcripts.html)은 아래 방법으로 내려받아 엽니다.
+게시 저장소: [seungbinshin/part5](https://github.com/seungbinshin/part5). [강의안 파일](https://github.com/seungbinshin/part5/blob/main/index.html)과 [전사문 파일](https://github.com/seungbinshin/part5/blob/main/transcripts.html)은 아래 방법으로 내려받아 엽니다.
 
 ## 읽기
 
@@ -44,4 +44,4 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 합성 실습에는 실제 연구 성과·실험 결과·모델 실행 결과를 사용하지 않았습니다. 선택 모델 호출은 기존에 사용하는 환경에서만 진행하며 비용·지연은 미측정입니다.
 
-현재는 로컬 검토본이며 추가본의 원격 게시는 보류했습니다. 저장소 공개 전환은 사용자 의도임을 확인했지만 이번 작업에서 visibility·원격 파일·Pages 설정은 변경하지 않았습니다. GitHub는 저장소의 HTML을 수업 화면으로 바로 렌더링하지 않으므로 저장소를 내려받아 `index.html`을 열어 주세요. 기존 운영 Wiki의 원격 저장소는 변경하지 않습니다.
+공개 GitHub 저장소로 제공하는 정적 강의안입니다. GitHub Pages는 구성하지 않았습니다. GitHub는 저장소의 HTML을 수업 화면으로 바로 렌더링하지 않으므로 저장소를 내려받아 `index.html`을 열어 주세요. 기존 운영 Wiki의 원격 저장소는 변경하지 않습니다.
