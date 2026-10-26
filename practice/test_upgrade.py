@@ -135,7 +135,7 @@ class UpgradeTests(unittest.TestCase):
     def test_plan_apply_rollback_roundtrip_preserves_originals(self):
         planned = self.plan()
         self.assertEqual(snapshot(self.root), self.before, "plan must not write")
-        self.assertEqual(len(planned["added_sha256"]), 13)
+        self.assertEqual(len(planned["added_sha256"]), 14)
         result = self.apply()
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assert_baseline_unchanged()

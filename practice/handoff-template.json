@@ -1,0 +1,8 @@
+{
+  "input_version": "synthetic-v1",
+  "review_file": "outputs/review.json",
+  "review_sha256": "",
+  "pending_claim_ids": [],
+  "approval_status": "awaiting-human",
+  "next_actor": "human"
+}

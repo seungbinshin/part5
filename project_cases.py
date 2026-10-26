@@ -74,7 +74,7 @@ def render(cases):
         if case.get('period'):
             html.append(f'<span class="small case-period">{escape(case["period"])}</span>')
         html.append(f'</div><h2 id="{heading}">{escape(case["title"])}</h2><p class="case-summary">{escape(case["summary"])}</p><p class="case-evidence">{escape(case["evidence_status"])}</p><details><summary aria-label="{escape(case["title"], quote=True)}: 과정과 배울 점">과정·배울 점·한계</summary><div class="detail case-detail"><dl>')
-        for name, label in [('context', '문제'), ('approach', '검증·실패를 다룬 과정'), ('outcome', '당시 기록에서 확인한 결과'), ('lesson', '배울 점'), ('transfer', 'AI DRAM Wiki에 옮길 원칙'), ('limits', '한계와 미확인 사항')]:
+        for name, label in [('context', '문제'), ('approach', '해결을 시도한 과정'), ('outcome', '당시 기록에서 확인한 결과'), ('lesson', '배울 점'), ('transfer', '다른 연구 작업에서 참고한다면'), ('limits', '한계와 미확인 사항')]:
             html.append(f'<dt>{label}</dt><dd>{escape(case[name])}</dd>')
         html.append(f'</dl><p class="small">사례 확인일 {case["review"]["checked_on"]}</p></div></details></li>')
     html.append('</ul>')

@@ -1,4 +1,6 @@
-# 기존 Part 4 Wiki에 Part 5 실습만 추가하기
+# 선택 합성 연습 · 기존 Part 4 Wiki에 Part 5 실습만 추가하기
+
+기본 경로는 [복사 프롬프트 3개](optional-agent-prompt.md)입니다. 아래는 도구가 실행할 절차를 확인하거나 문제를 해결할 때 보는 상세 안내입니다. 원본 경로·자료 경로를 한 번 지정하면 도구가 격리 사본, 계획, 추가, 검사와 결과 정리를 처리합니다. 권한 승인과 연구자의 판단은 직접 합니다.
 
 이미 만든 Wiki의 **복사본 또는 격리된 작업트리**에서 이어서 합니다. 원본 프로젝트 경로를 아래 명령에 넣지 마세요. 기존 논문·질문·실험 기록·규칙·Skill을 새 템플릿으로 교체하지 않습니다. 별도 서버나 Skill 설치도 필요 없습니다.
 
@@ -28,14 +30,14 @@
     └── part5-lab/                              새로 추가
         ├── manuscript.txt, case-data.json
         ├── source-results.csv, source-notes.txt
-        ├── review-template.json, expected-review.json
+        ├── review-template.json, expected-review.json, handoff-template.json
         ├── input-checksums.json, check_review.py
         ├── README.md, UPGRADE.md, optional-agent-prompt.md
         ├── role-contracts.md, HANDOFF.md
         └── .part5-added-files.json               추가 경로·해시 기록
 ```
 
-`role-contracts.md`는 기존 문헌 읽기·실험 기록 절차와 네 역할의 인계를 연결합니다. `HANDOFF.md`에는 보존한 기준, 실제 추가 파일, 검토 결과와 사람의 결정을 나눠 기록합니다. 핵심 실습의 새 산출물은 `outputs/review.json`입니다. 기존 Wiki의 `data/wiki.json`, 허브, index, log 또는 정적 빌드에 자동 편입하지 않습니다. 기존 Skill을 다시 생성하거나 실행하지 않고, 그 입력·검증·보존 원칙 위에 별도 리뷰 단계를 추가합니다.
+`role-contracts.md`는 기존 문헌 읽기·실험 기록 절차와 네 역할의 인계를 연결합니다. `HANDOFF.md`는 인계 형식 안내입니다. 추가 manifest, 학습자 보고서와 인계 JSON에 보존한 기준·실제 추가·검토 결과·사람에게 남길 판단을 나눠 기록합니다. 핵심 실습의 새 산출물은 `outputs/review.json`과 그 해시·미해결 항목을 연결한 `outputs/handoff.json`입니다. 기존 Wiki의 `data/wiki.json`, 허브, index, log 또는 정적 빌드에 자동 편입하지 않습니다. 기존 Skill을 다시 생성하거나 실행하지 않고, 그 입력·검증·보존 원칙 위에 별도 리뷰 단계를 추가합니다.
 
 ## Python으로 추가하기
 
@@ -53,14 +55,14 @@ python3 practice/upgrade_wiki.py plan --project-copy "$WIKI_COPY" --skills-dir s
 
 ```sh
 python3 practice/upgrade_wiki.py apply --project-copy "$WIKI_COPY" --plan part5-upgrade-plan.json --confirm-isolated-copy
-python3 "$WIKI_COPY/llm_wiki/research/part5-lab/check_review.py" "$WIKI_COPY/llm_wiki/research/part5-lab/expected-review.json"
+
 ```
 
-정상 결과는 `ADDED`, `added_files: 13`과 추가 기록 파일 경로입니다. 이어진 검수기는 `PASS`를 출력합니다. 그다음 복사본의 `part5-lab/README.md`를 따라 자신의 보고서를 작성합니다. Skill 경로를 찾았다는 사실은 해당 도구가 자동 로드한다는 검증을 대신하지 않습니다.
+정상 결과는 `ADDED`, `added_files: 14`과 추가 기록 파일 경로입니다. 그다음 프롬프트 2·3으로 자신의 보고서와 인계를 만들고 그것을 검사합니다. 사전 해설의 PASS로 학습자 결과를 대신하지 않습니다. Skill 경로를 찾았다는 사실은 해당 도구가 자동 로드한다는 검증을 대신하지 않습니다.
 
 ## Python 없이 추가하기
 
-파일 관리자로 기존 Wiki를 별도 복사한 뒤 `llm_wiki/research/part5-lab`이 없는지 확인합니다. 있으면 병합하거나 덮어쓰지 말고 중단합니다. 없는 경우에만 새 폴더를 만들고 위 트리의 **추가 파일 13개**를 내려받은 `practice/`에서 그곳으로 복사합니다. `upgrade_wiki.py`, 테스트 코드, 선택 에이전트 정의는 필수 추가 파일에 포함하지 않습니다.
+파일 관리자로 기존 Wiki를 별도 복사한 뒤 `llm_wiki/research/part5-lab`이 없는지 확인합니다. 있으면 병합하거나 덮어쓰지 말고 중단합니다. 없는 경우에만 새 폴더를 만들고 위 트리의 **추가 파일 14개**를 내려받은 `practice/`에서 그곳으로 복사합니다. `upgrade_wiki.py`, 테스트 코드, 선택 에이전트 정의는 필수 추가 파일에 포함하지 않습니다.
 
 복사한 파일 목록을 별도 메모에 남깁니다. Python 없는 경로에서는 자동 해시 manifest가 만들어지지 않습니다. 정리는 추가 목록과 자신이 고친 파일을 대조한 뒤 직접 합니다. 기존 Wiki의 규칙·Skill·연구 기록은 이동하거나 덮어쓰지 않습니다. 실습 답은 `expected-review.json`과 직접 비교할 수 있습니다.
 

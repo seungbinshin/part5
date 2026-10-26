@@ -30,6 +30,18 @@ try:
  cases = validate(json.loads((ROOT/'data/project-cases.json').read_text()), options.require_project_cases)
 except (ValueError, OSError) as error:
  parser.exit(1, str(error)+'\n')
+prompt_keys = ('prepare', 'review', 'verify', 'cleanup')
+prompt_blocks = re.findall(r'^```text\n(.*?)^```', (ROOT/'practice/project-prompts.md').read_text(), re.M|re.S)
+if len(prompt_blocks) != len(prompt_keys) or any(not block.strip() for block in prompt_blocks):
+ parser.exit(1, '실습 프롬프트 3개와 선택 정리 요청 1개를 확인하세요.\n')
+template=(ROOT/'src/index.html').read_text()
+for key, block in zip(prompt_keys, prompt_blocks):
+ marker='<!-- PRACTICE_PROMPT:'+key+' -->'
+ if template.count(marker) != 1:
+  parser.exit(1, '실습 프롬프트 위치가 없거나 중복되었습니다: '+key+'\n')
+ label={'prepare':'1단계 사본 준비','review':'2단계 근거와 초안','verify':'3단계 검사와 인계','cleanup':'선택 정리'}[key]
+ fragment='<div class="prompt" data-practice-step="'+key+'"><button class="copy" type="button" aria-label="'+label+' 프롬프트 복사">복사</button><pre><code>'+escape(block.strip())+'</code></pre></div>'
+ template=template.replace(marker,fragment)
 manifest = json.loads((ROOT / 'docs/transcript-manifest.json').read_text())
 summaries = {
  'Ch01-01': 'Skill의 절차와 Subagent의 책임을 구분하고, 목표·입력·제약·출력·중지 조건을 위임 명세서에 적습니다.',
@@ -71,7 +83,6 @@ for i,item in enumerate(expected['findings'],1):
  for key,label in labels.items():lab.append(f'<option value="{key}">{label}</option>')
  lab.append(f'</select><p class="feedback" id="feedback-{claim}"></p></div>')
 lab.append('<div class="button-row"><button class="button primary" type="submit">판정 확인</button><button class="button" type="button" id="reset-exercise">다시 해보기</button></div><div class="result" id="review-result" role="status" tabindex="-1"></div></form>')
-template=(ROOT/'src/index.html').read_text()
 index=re.sub(r'<!-- LAB:START -->.*?<!-- LAB:END -->','<!-- LAB:START -->\n'+''.join(lab)+'\n<!-- LAB:END -->',template,flags=re.S)
 index=re.sub(r'<!-- PROJECT_CASES:START -->.*?<!-- PROJECT_CASES:END -->',lambda _: '<!-- PROJECT_CASES:START -->\n'+render(cases)+'\n<!-- PROJECT_CASES:END -->',index,flags=re.S)
 index=index.replace('<!-- PROJECT_CASE_COUNT -->', str(len(cases))+'개 사례' if cases else '확인 중')

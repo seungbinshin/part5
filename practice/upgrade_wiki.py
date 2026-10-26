@@ -14,7 +14,7 @@ FILES = (
     "README.md", "UPGRADE.md", "manuscript.txt", "case-data.json",
     "source-results.csv", "source-notes.txt", "review-template.json",
     "expected-review.json", "input-checksums.json", "check_review.py",
-    "optional-agent-prompt.md", "role-contracts.md", "HANDOFF.md",
+    "optional-agent-prompt.md", "role-contracts.md", "HANDOFF.md", "handoff-template.json",
 )
 
 

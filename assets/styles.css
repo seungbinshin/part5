@@ -11,3 +11,5 @@
 .case-category{font-size:12px;color:var(--muted);font-weight:700}.case-evidence{font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:12px;margin:0}.case-scope{margin-top:28px}@media(max-width:760px){.case-list{grid-template-columns:1fr}}
 
 @media(min-width:761px) and (max-width:1200px){.case-list{grid-template-columns:1fr}}
+
+.lesson{scroll-margin-top:130px}

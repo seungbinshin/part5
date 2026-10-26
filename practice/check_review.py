@@ -58,14 +58,48 @@ def check(report, root):
     return errors
 
 
+def check_handoff(handoff, report, report_path, root):
+    """인계가 현재 보고서를 가리키고 미해결 판단을 보존하는지 확인한다."""
+    fields = {"input_version", "review_file", "review_sha256", "pending_claim_ids",
+              "approval_status", "next_actor"}
+    if not isinstance(handoff, dict) or set(handoff) != fields:
+        return ["인계의 필드가 handoff-template.json과 다릅니다."]
+    errors = []
+    if report_path.resolve() != (root / "outputs/review.json").resolve():
+        errors.append("인계와 함께 검사할 보고서는 outputs/review.json이어야 합니다.")
+    expected = {
+        "input_version": report.get("input_version") if isinstance(report, dict) else None,
+        "review_file": "outputs/review.json",
+        "review_sha256": hashlib.sha256(report_path.read_bytes()).hexdigest(),
+        "approval_status": "awaiting-human",
+        "next_actor": "human",
+    }
+    for key, value in expected.items():
+        if type(handoff.get(key)) is not type(value) or handoff.get(key) != value:
+            errors.append("현재 보고서 또는 인계 계약과 다른 값: " + key)
+    findings = report.get("findings", []) if isinstance(report, dict) else []
+    pending = sorted(item["claim_id"] for item in findings
+                     if isinstance(item, dict) and isinstance(item.get("claim_id"), str)
+                     and item.get("classification") in
+                     ("unsupported_generalization", "insufficient_evidence"))
+    ids = handoff.get("pending_claim_ids")
+    if not isinstance(ids, list) or not all(isinstance(x, str) for x in ids) or sorted(ids) != pending:
+        errors.append("인계에서 추가 근거나 사람의 판단이 필요한 주장 ID를 빠짐없이 남기세요.")
+    return errors
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("report", type=Path, help="검수할 JSON 보고서")
     parser.add_argument("--json", action="store_true", help="검사 결과를 JSON으로 출력")
+    parser.add_argument("--handoff", type=Path, help="현재 학습자 보고서에 연결할 JSON 인계")
     args = parser.parse_args()
     root = Path(__file__).resolve().parent
     try:
-        errors = check(read_json(args.report), root)
+        report = read_json(args.report)
+        errors = check(report, root)
+        if args.handoff:
+            errors += check_handoff(read_json(args.handoff), report, args.report, root)
     except (OSError, ValueError, TypeError) as exc:
         errors = ["파일 또는 JSON을 읽을 수 없습니다: " + str(exc)]
     result = {
@@ -75,6 +109,8 @@ def main():
         "manual_review": "reason과 next_check의 의미, 원고 변경 여부, 연구자의 최종 결정은 직접 확인하세요.",
         "limits": "실제 연구의 진실성이나 모델 품질을 평가하지 않습니다. 파일 접근을 차단하는 샌드박스가 아닙니다."
     }
+    if args.handoff:
+        result["checked"] += ", 인계의 보고서 해시·미해결 항목·승인 대기"
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))
     else:

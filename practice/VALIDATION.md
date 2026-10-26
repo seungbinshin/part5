@@ -2,7 +2,7 @@
 
 확인일: 2026-10-26. Python 표준 라이브러리로 실행했습니다. 원본 연구위키를 변경하거나 원격 저장소에 쓰지 않았습니다.
 
-## 실습 검수기
+## 초기 실습 검수기 기록
 
 ```sh
 python3 practice/check_review.py practice/expected-review.json
@@ -43,3 +43,13 @@ python3 practice/test_upgrade.py --part4-reference /path/to/part4 --actual-wiki-
 추가 파일과 manifest는 목적지 옆의 임시 폴더에서 모두 쓰고 해시를 확인합니다. 완성 후 배타적으로 확보한 빈 목적지로 디렉터리를 한 번에 옮깁니다. 쓰기 오류가 난 임시 자료는 정리하며, 기존 파일이나 다른 작업이 만든 충돌 경로를 덮어쓰지 않습니다. 한 복사본에서는 추가·복구 작업을 동시에 실행하지 않습니다.
 
 이 검사는 지정된 추가·복구 절차의 소프트웨어 동작을 확인합니다. 기존 Wiki의 연구 내용, Skill 등록·자동 실행 여부, 다른 에이전트의 권한 격리를 보증하지 않습니다. 테스트 임시 디렉터리는 종료 시 정리했습니다.
+
+## 프롬프트 중심 실습의 보고서·인계 검사
+
+프롬프트 세 단계는 `optional-agent-prompt.md`에 있으며 추가 payload는 `handoff-template.json`을 포함한 14개입니다. 핵심 경로는 학습자 `outputs/review.json`을 검사하고, 이어서 그 파일을 가리키는 `outputs/handoff.json`까지 함께 검사합니다.
+
+- `python3 practice/smoke_test.py`: 15개 통과. 기존 6개에 학습자 보고서와 인계 통과, 근거 ID 누락, 인계 파일 누락, 오래된 보고서 해시, 미해결 주장 누락·중복, 거짓 승인, 다른 보고서 경로, 인계 형식 오류 검사를 더했습니다.
+- `python3 practice/test_upgrade.py --part4-reference <Part4-참조폴더> --actual-wiki-root <기존-Wiki-폴더>`: 16개 다시 통과. 필요한 선행 파일만 임시 사본으로 복사했으며 기존 Wiki를 변경하지 않았습니다. 추가·원복 오류와 학습자 산출물 보존도 다시 확인했습니다.
+- `optional-agent-prompt.md`의 text 코드 블록은 준비·검토·검사·정리 순서의 4개입니다. 정리는 선택이며 핵심 요청은 3개입니다.
+
+위 테스트는 합성 fixture의 소프트웨어 동작 검사입니다. 독립 모델의 프롬프트 실행 성공이나 연구 성능을 뜻하지 않습니다. 직접 프롬프트를 수행한 확인 범위는 강의안의 최신 검증 기록과 구분해 읽습니다.

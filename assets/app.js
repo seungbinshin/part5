@@ -56,8 +56,8 @@
   const status=document.querySelector('#status');
   document.querySelectorAll('.copy').forEach(button=>button.addEventListener('click',async()=>{
     const code=button.closest('.prompt').querySelector('code');
-    try{await navigator.clipboard.writeText(code.textContent);button.textContent='복사됨';status.textContent='코드를 복사했습니다.';setTimeout(()=>button.textContent='복사',1500);}
-    catch{const range=document.createRange();range.selectNodeContents(code);const s=getSelection();s.removeAllRanges();s.addRange(range);status.textContent='자동 복사를 사용할 수 없습니다. 선택된 코드를 복사해 주세요.';}
+    try{await navigator.clipboard.writeText(code.textContent);button.textContent='복사됨';status.textContent='요청 내용을 복사했습니다.';setTimeout(()=>button.textContent='복사',1500);}
+    catch{const range=document.createRange();range.selectNodeContents(code);const s=getSelection();s.removeAllRanges();s.addRange(range);status.textContent='자동 복사를 사용할 수 없습니다. 선택된 요청 내용을 복사해 주세요.';}
   }));
   const quiz=document.querySelector('#review-exercise');
   if(quiz){quiz.addEventListener('submit',e=>{
