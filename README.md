@@ -2,9 +2,12 @@
 
 Part 4까지 완료한 AI Wiki를 전제로 하는 한국어 정적 강의안입니다. **배울 점**과 **실습**을 큰 탭으로 구분합니다. 실습은 Wiki 사본에 필요한 파일만 추가하며 기존 자료·Skill·규칙을 덮어쓰지 않습니다.
 
+배포 저장소: [seungbinshin/part5](https://github.com/seungbinshin/part5) · 비공개. [강의안 파일](https://github.com/seungbinshin/part5/blob/main/index.html)과 [전사문 파일](https://github.com/seungbinshin/part5/blob/main/transcripts.html)은 아래 방법으로 내려받아 엽니다.
+
 ## 읽기
 
 - `index.html`을 브라우저에서 열면 됩니다. 라이브러리 설치나 API 키가 필요하지 않습니다.
+- GitHub에서 **Code → Download ZIP**을 선택하고 압축을 푼 뒤 엽니다. `index.html`만 따로 내려받지 말고 `assets/`, `practice/`, `transcripts/` 등 전체 폴더를 함께 보관합니다.
 - `transcripts.html`에는 기존 전사문 8개의 원문과 읽기용 요약이 있습니다.
 - `practice/UPGRADE.md`에는 사본 만들기, 변경 예정 목록, 추가, 검토, 인계, 원복 절차가 있습니다.
 - `docs/sources.md`는 출처·확인일·기술 설명의 차이·윤문 범위를 기록합니다.
