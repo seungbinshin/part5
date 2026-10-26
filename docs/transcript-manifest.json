@@ -1,0 +1,81 @@
+{
+  "checked_on": "2026-10-26",
+  "repository": "HyResearchAgent/part3",
+  "commit": "985c36314569e92c8ad76076dcda96e5708b2ace",
+  "audio_verified": false,
+  "raw_modified": false,
+  "files": [
+    {
+      "id": "Ch01-01",
+      "chapter": 1,
+      "title": "Sub Agents에 연구 업무를 맡기려면",
+      "sha256": "96ac290d538876824a09b1c2b0b0628ed85890aeb048c8e303cfbaa044810ee2",
+      "line_count": 179,
+      "first_timestamp": "00:00:01",
+      "last_timestamp": "00:10:05"
+    },
+    {
+      "id": "Ch01-02",
+      "chapter": 1,
+      "title": "내 연구 프로젝트에 필요한 에이전트 역할 정의하기",
+      "sha256": "55888ceb09e84a4843b23286b2f7a3a5ef87c63ca98366c58f3161478f083fe0",
+      "line_count": 185,
+      "first_timestamp": "00:00:01",
+      "last_timestamp": "00:09:20"
+    },
+    {
+      "id": "Ch02-01",
+      "chapter": 2,
+      "title": "Literature Reviewer Agent로 문헌 리뷰 맡기기",
+      "sha256": "aac3b68b6713a65ddb953bda8a8a2a9c2e675b70108449fb809c41edb2f19aeb",
+      "line_count": 281,
+      "first_timestamp": "00:00:00",
+      "last_timestamp": "00:16:00"
+    },
+    {
+      "id": "Ch02-02",
+      "chapter": 2,
+      "title": "Experiment Planner Agent로 다음 실험 후보 만들기",
+      "sha256": "acd2a408b5657ea1f604ef757767f7a0d0864dfafb5f805996b2774fddccb964",
+      "line_count": 261,
+      "first_timestamp": "00:00:01",
+      "last_timestamp": "00:13:14"
+    },
+    {
+      "id": "Ch02-03",
+      "chapter": 2,
+      "title": "Draft Writer Agent로 논문 초안 만들기",
+      "sha256": "2ac4604a5402c90635a9d2ceb037a5c9caf64e0bc835b6804ab31b92dffc7f91",
+      "line_count": 274,
+      "first_timestamp": "00:00:01",
+      "last_timestamp": "00:17:39"
+    },
+    {
+      "id": "Ch02-04",
+      "chapter": 2,
+      "title": "Writing Reviewer Agent로 초안의 논리와 근거 점검하기",
+      "sha256": "ab859f7378c0a21eb95cd1a63991c4b8d0506d74447e0ea402d861e61d38f52c",
+      "line_count": 140,
+      "first_timestamp": "00:00:01",
+      "last_timestamp": "00:07:39"
+    },
+    {
+      "id": "Ch03-01",
+      "chapter": 3,
+      "title": "Sub Agents 간 역할 충돌을 줄이는 운영 규칙",
+      "sha256": "2e020b3f0fbc0c440e1bcc33c9d12c0a58a3d44d8f716485dda2600137ab4de1",
+      "line_count": 153,
+      "first_timestamp": "00:00:01",
+      "last_timestamp": "00:08:45"
+    },
+    {
+      "id": "Ch03-02",
+      "chapter": 3,
+      "title": "리뷰어 페르소나 5명의 독립 심사",
+      "sha256": "59c2624f6661b11d485059b79c7740e9e1efb67c63257354f5f5feb0c4efeb6e",
+      "line_count": 257,
+      "first_timestamp": "00:00:01",
+      "last_timestamp": "00:15:47"
+    }
+  ]
+}

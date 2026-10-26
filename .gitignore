@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.DS_Store
+practice/outputs/
+part5-upgrade-plan.json

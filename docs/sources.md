@@ -1,0 +1,55 @@
+# Part 5 출처와 편집 기준
+
+확인일: 2026-10-26. 공개 보완 자료의 1차 확인 기준은 06:53 UTC / 15:53 KST다. 원강의·제품 문서·저자 권고·연구자 실험·이 교재의 설계 판단을 구분한다.
+
+## 원강의
+
+사용자가 지정한 원본은 `HyResearchAgent/part3`의 `transcripts/part5_*`다. 기준 커밋은 `985c36314569e92c8ad76076dcda96e5708b2ace`다. 기존 TXT 8개 1,730줄을 그대로 보존했으며 새 음성 전사라고 표시하지 않는다.
+
+- [원본 저장소](https://github.com/HyResearchAgent/part3/tree/985c36314569e92c8ad76076dcda96e5708b2ace/transcripts)
+- [로컬 원문과 편집 요약](../transcripts.html)
+- [파일별 해시·시각 범위](transcript-manifest.json)
+- [전사 오류 후보와 확인 필요](../TRANSCRIPT_NOTES.md)
+
+타임스탬프는 발화 시작점이다. 마지막 시각을 영상의 정확한 길이라고 부르지 않는다. 원음과 대조하지 않아 자동전사 오류와 누락 없는 완전성은 확인되지 않았다. 특히 Ch02-01의 15:10→15:43, Ch03-01의 06:17→06:47 간격은 원문대로 남겼다. 불명확한 데이터셋·파일명·권고 문구를 문맥만으로 확정하지 않았다.
+
+원본의 `course-materials/part-05/practice-files/`에서 역할표·README·역할 정의·운영 규칙을 교차 확인했다. 다음 차이는 본문에서 드러냈다.
+
+- `agents/writing-reviewer.md`의 tools에는 Write, Edit가 있다. 본문의 경로 금지를 기계적인 접근 차단으로 단정하지 않는다.
+- `agents/experiment-planner.md`는 비용 근거가 없으면 산정 불가로 남기도록 정한다. 전사의 추정 허용 설명과 구분한다.
+- `rules/manuscript.md`의 분량·섹션 수는 강의 예제 규칙이며 일반적인 논문 규격이 아니다.
+- Ch02-04 06:03–06:15는 시연 초안이 합성 데이터에 기반했다고 밝힌다. 시연 수치·분량·지적 건수를 우리의 실측 성과로 사용하지 않았다.
+
+## Part 4 기준선과 디자인
+
+[nufrancis/hyresearchagent](https://github.com/nufrancis/hyresearchagent/tree/0457f15c374544337e1b2977836e428d9d687ca6), commit `0457f15c374544337e1b2977836e428d9d687ca6`의 Part 4 안내·템플릿을 참조했다. 두 참고 강의안의 흰 배경, 테라코타 강조, 목차 점·세로 흐름, 가는 구분선, 본문 가독성을 유지하며 HTML·CSS·JS를 새로 작성했다. 외부 폰트나 원본의 삽화는 복제하지 않았다. 시스템에 Pretendard가 있으면 사용하고 없으면 시스템 한글 글꼴로 표시한다.
+
+수업은 Part 4 완료 후 기존 AI Wiki를 업그레이드하는 전제다. 실제 확인한 기존 Wiki는 `skills/paper-reading/SKILL.md`, `skills/experiment-log/SKILL.md`를 일반 절차 문서로 사용한다. 이 파일의 존재는 등록·자동 로딩의 증거가 아니다. Part 4 참고 저장소의 루트 안내는 `.agents/skills/`를, 일부 묶음 안내는 `.claude/skills/`를 사용한다. 실습은 경로를 검사하며 자동으로 기존 설정을 이전하거나 덮어쓰지 않는다.
+
+필수 변경은 Wiki 사본의 `llm_wiki/research/part5-lab/`에만 추가한다. 기존 논문·Skill·규칙·index·log·JSON 저장소는 유지한다. Claude Code를 쓰는 선택 실습에서만 프로젝트의 `.claude/agents/part5-reviewer.md`를 추가한다. 다른 제품의 에이전트 등록 경로로 일반화하지 않는다.
+
+## 현대적 보완
+
+| 출처 | 발행·버전 | 수업에 연결한 범위 | 근거 성격 |
+|---|---|---|---|
+| [Building effective agents](https://www.anthropic.com/research/building-effective-agents) | 2024-12-19 | 고정 워크플로와 자율 에이전트 구분, 단순한 구조부터 비교 | 공급사 저자의 설계 권고 |
+| [How we built our multi-agent research system](https://www.anthropic.com/research/multi-agent-research-system) | 2025-06-13 | 독립 탐색 병렬화와 의존 작업의 한계, 조율·토큰 비용 | 공급사 개발 사례·자체 평가 |
+| [Effective context engineering for AI agents](https://www.anthropic.com/research/effective-context-engineering-for-ai-agents) | 2025-09-29 | 필요한 정보와 원문 식별자를 인계에 남기기 | 공급사 저자의 설계 권고 |
+| [Why Do Multi-Agent LLM Systems Fail?](https://arxiv.org/abs/2503.13657v3) | 최초 2025-03-17 / v3 2025-10-26 | 설계·불일치·과업 검증의 실패 분류 | 연구자 분석; 해당 모델·과제 범위 |
+| [How we contain Claude across products](https://www.anthropic.com/research/how-we-contain-claude) | 2026-05-25 | 모델 판단과 환경 권한 구분, 외부 자료와 지시 분리 | 공급사 보안 설계 설명 |
+| [More Capable, Less Cooperative?](https://arxiv.org/abs/2604.07821v2) | 최초 2026-04-09 / v2 2026-06-04 | 능력과 협력 성과의 차이, 인계 규칙의 필요를 생각하는 선택 읽기 | 제한된 턴 기반 실험 |
+| [Claude Code Subagents](https://code.claude.com/docs/en/sub-agents) | 확인 2026-10-26 / 상시 갱신 문서 | 시작 컨텍스트·fork·도구 제한·등록 경로 | 현재 제품 문서 |
+
+이 교재의 적용 제안은 출처 논문의 실험 결과가 아니다. 에이전트 수·병렬화로 얻는 시간·비용·품질 개선을 직접 측정하지 않았다. 공급사 글의 큰 향상률이나 토큰 배수를 수업 성과로 옮기지 않았다.
+
+## 실습과 윤문
+
+`practice/`의 원고, 근거, 사전 검토 결과는 새로 만든 교육용 합성 예제다. 검증기는 정해진 작은 사례의 형식·참조·선언된 경계·원본 해시를 검사한다. 이유의 의미, 실제 연구의 진실성, 모델 품질, 운영체제 권한 격리를 자동으로 보증하지 않는다. 실제 모델 호출은 하지 않았다. 학습시간은 편성용 예상이며 실측이 아니다.
+
+윤문은 공식 [im-not-ai](https://github.com/epoko77-ai/im-not-ai)의 v2.3.2, commit `b37e0206d31fffd9149bf57168d4d62eb2086bee`에서 `SKILL.md`, `quick-rules.md`, `diagnosis-rules.md`, `humanize-finalizer.md` 원문을 읽고 텍스트 규칙으로 적용했다. 의미·수치·출처·부정·불확실성을 보존하고 과장·번역투·반복 표현을 국소 수정했다. 원문 TXT는 윤문하지 않는다.
+
+원본 플러그인이 설치된 것은 아니다. 실행 스크립트·정량 shim·공식 게이트는 사용하지 않으므로 변경률·등급·공식 파이프라인 통과를 주장하지 않는다. [MIT 라이선스](im-not-ai-LICENSE.txt)를 보관했다.
+
+## 배포 범위
+
+자료는 승인된 비공개 Part 5 저장소에 게시한다. 참고 강의 저장소에는 명시적 LICENSE 파일이 없었으므로 원강의 자료를 공개 재배포할 권한이 확인된 것으로 표시하지 않는다. 이 저장소를 공개로 전환하거나 공개 Pages를 켜려면 별도 검토가 필요하다. 기존 운영 Wiki 저장소에는 원격 push하지 않는다.

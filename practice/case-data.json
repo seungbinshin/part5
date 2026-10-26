@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "input_version": "synthetic-v1",
+  "data_kind": "교육용 합성 자료 — 실제 논문·실험·성능 결과가 아님",
+  "reader": "주장과 근거의 범위를 확인하는 연구자",
+  "evidence": [
+    {
+      "id": "E1",
+      "location": "case-data.json → evidence → E1",
+      "source_file": "source-results.csv",
+      "source_record": "E1",
+      "scope": "가상의 도시 A, 맑은 야간, 평가 묶음 night-demo, 같은 평가 규칙, 한 번의 예시 기록",
+      "metric": "교육용 가상 점수, 단위 없음",
+      "baseline": 60,
+      "candidate_a": 63,
+      "caveat": "숫자는 비교 범위를 배우기 위해 만든 합성 값이다. 실제 성능 개선이나 통계적 유의성을 뜻하지 않는다."
+    },
+    {
+      "id": "E2",
+      "location": "case-data.json → evidence → E2",
+      "source_file": "source-notes.txt",
+      "source_record": "E2",
+      "scope": "후보 B의 실행 메모",
+      "note": "속도를 점검할 예정이라고 적혀 있다. 지연 시간 측정값, 비교 조건, 실행 장비는 기록되어 있지 않다."
+    }
+  ],
+  "claims": [
+    {"id": "C1", "manuscript_location": "manuscript.txt → C1", "evidence_ids": ["E1"]},
+    {"id": "C2", "manuscript_location": "manuscript.txt → C2", "evidence_ids": ["E1"]},
+    {"id": "C3", "manuscript_location": "manuscript.txt → C3", "evidence_ids": ["E2"]}
+  ],
+  "role_contract": {
+    "reviewer": "writing-reviewer",
+    "read_only": ["manuscript.txt", "case-data.json", "source-results.csv", "source-notes.txt", "review-template.json"],
+    "allowed_writes": ["outputs/review.json"],
+    "prohibited": ["원고 수정 또는 대체 문장 작성", "측정값·서지·실험 결과 생성", "실험 실행", "외부 검색", "주장 채택 또는 보류의 최종 결정"],
+    "stop_when": ["입력이 없거나 버전이 다름", "허용 범위를 넘는 파일 수정이 필요함"],
+    "human_decision": "연구자가 보고서를 읽고 반영 여부를 결정한다."
+  }
+}

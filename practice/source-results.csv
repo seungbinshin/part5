@@ -1,0 +1,2 @@
+record_id,data_kind,setting,metric,baseline,candidate_a
+E1,synthetic,city-A|clear-night|night-demo|same-eval|single-record,unitless-demo-score,60,63

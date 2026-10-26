@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "input_version": "synthetic-v1",
+  "reviewer": "writing-reviewer",
+  "requested_writes": ["outputs/review.json"],
+  "manuscript_changes": false,
+  "approval_status": "awaiting-human",
+  "findings": [
+    {"claim_id": "C1", "classification": "", "evidence_ids": ["E1"], "reason": "", "next_check": ""},
+    {"claim_id": "C2", "classification": "", "evidence_ids": ["E1"], "reason": "", "next_check": ""},
+    {"claim_id": "C3", "classification": "", "evidence_ids": ["E2"], "reason": "", "next_check": ""}
+  ],
+  "human_decisions": ["보고서를 읽고 반영할 지적과 보류할 지적을 선택한다."]
+}

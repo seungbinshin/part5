@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "input_version": "synthetic-v1",
+  "reviewer": "writing-reviewer",
+  "requested_writes": ["outputs/review.json"],
+  "manuscript_changes": false,
+  "approval_status": "awaiting-human",
+  "findings": [
+    {
+      "claim_id": "C1",
+      "classification": "supported_within_scope",
+      "evidence_ids": ["E1"],
+      "reason": "근거 대장의 E1과 source-results.csv의 E1행은 같은 합성 평가 조건에서 기준 60, 후보 A 63으로 일치한다. C1은 이 예시의 한 번의 비교로 범위를 제한한다.",
+      "next_check": "실제 연구에 적용하려면 원본 측정과 반복 평가를 확인한다. 지금의 판정은 합성 기록 안에서만 성립한다."
+    },
+    {
+      "claim_id": "C2",
+      "classification": "unsupported_generalization",
+      "evidence_ids": ["E1"],
+      "reason": "E1은 도시 A의 맑은 야간 조건 하나만 다룬다. 모든 도시·날씨와 항상이라는 표현까지 뒷받침하지 못한다.",
+      "next_check": "주장 범위를 현재 자료에 맞출지, 다른 조건의 근거를 추가할지 연구자가 결정한다."
+    },
+    {
+      "claim_id": "C3",
+      "classification": "insufficient_evidence",
+      "evidence_ids": ["E2"],
+      "reason": "E2가 연결한 source-notes.txt에는 측정 예정이라는 메모만 있다. 지연 시간과 비교 조건이 없으므로 빨라졌는지 판단할 수 없다.",
+      "next_check": "지연 시간의 원본 측정값·장비·비교 조건을 확인한다. 리뷰어는 값을 만들거나 실험을 실행하지 않는다."
+    }
+  ],
+  "human_decisions": [
+    "C1의 제한된 범위를 유지할지 확인한다.",
+    "C2의 범위를 줄일지, 근거를 보강할지 선택한다.",
+    "C3을 보류할지, 별도 측정을 승인할지 선택한다."
+  ]
+}
