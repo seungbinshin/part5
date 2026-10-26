@@ -7,10 +7,9 @@
   const sidebar = document.querySelector('.sidebar');
   const menu = document.querySelector('#menu');
   const scrim = document.querySelector('.scrim');
-  const remembered = {learn:'learn-roles',practice:'practice-start'};
+  const remembered = {learn:'learn-roles',practice:'practice-start',projects:'projects-cases'};
   const syncSidebar = () => {sidebar.inert=matchMedia('(max-width:760px)').matches&&!sidebar.classList.contains('open');};
   const closeMenu = () => {sidebar.classList.remove('open');scrim.classList.remove('open');menu.setAttribute('aria-expanded','false');syncSidebar();};
-  let pendingTab=null;
   function route(focus = true) {
     let id;try{id = decodeURIComponent(location.hash.slice(1));}catch{ id = ''; }
     const lesson = lessons.find(x=>x.id===id)||lessons[0];
@@ -24,8 +23,9 @@
     if(focus){lesson.focus({preventScroll:true});window.scrollTo({top:0,behavior:'instant'});}
   }
   function activateTab(tab) {
-    pendingTab=location.hash!=="#"+remembered[tab.dataset.group]?tab:null;
-    location.hash=remembered[tab.dataset.group];route(false);
+    const hash='#'+remembered[tab.dataset.group];
+    if(location.hash!==hash)history.pushState(null,'',hash);
+    route(false);
     tab.focus({preventScroll:true});window.scrollTo({top:0,behavior:'instant'});
   }
   tabs.forEach((tab,i)=>{
@@ -66,5 +66,5 @@
     const result=document.querySelector('#review-result');result.textContent=count===3?'3개 판단을 모두 확인했습니다. 이제 검토자가 원고를 직접 고쳐도 되는지 아래에서 확인하세요.':`${count}/3개를 확인했습니다. 근거의 조건과 범위를 다시 비교해 보세요.`;result.focus();
   });document.querySelector('#reset-exercise').addEventListener('click',()=>{quiz.reset();quiz.querySelectorAll('.feedback').forEach(x=>x.textContent='');quiz.querySelectorAll('select').forEach(x=>x.removeAttribute('aria-invalid'));document.querySelector('#review-result').textContent='';quiz.querySelector('select').focus();});}
   document.querySelector('.skip').addEventListener('click',e=>{e.preventDefault();document.querySelector('.lesson:not([hidden])').focus();});
-  addEventListener('hashchange',()=>{const tab=pendingTab;pendingTab=null;route(!tab);if(tab){tab.focus({preventScroll:true});window.scrollTo({top:0,behavior:'instant'});}});route(false);
+  addEventListener('hashchange',()=>route());route(false);
 })();

@@ -5,8 +5,31 @@ from html import escape
 import json
 import re
 import hashlib
+import argparse
+import tempfile
+from project_cases import validate, render
 
 ROOT = Path(__file__).resolve().parent
+
+def write_html(path, content):
+    # 완성된 파일로 교체해 미리보기나 다른 읽기가 부분 HTML을 보지 않게 한다.
+    staging = None
+    try:
+        with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', dir=path.parent, delete=False) as temporary:
+            staging = Path(temporary.name)
+            temporary.write(content)
+        staging.replace(path)
+    finally:
+        if staging is not None:
+            staging.unlink(missing_ok=True)
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--require-project-cases', action='store_true', help='게시 전 필수: 검토가 끝난 개인 프로젝트 사례가 없으면 중단')
+options = parser.parse_args()
+try:
+ cases = validate(json.loads((ROOT/'data/project-cases.json').read_text()), options.require_project_cases)
+except (ValueError, OSError) as error:
+ parser.exit(1, str(error)+'\n')
 manifest = json.loads((ROOT / 'docs/transcript-manifest.json').read_text())
 summaries = {
  'Ch01-01': 'Skill의 절차와 Subagent의 책임을 구분하고, 목표·입력·제약·출력·중지 조건을 위임 명세서에 적습니다.',
@@ -35,7 +58,7 @@ for f in manifest['files']:
   parts.append(f'<p class="transcript-line" id="{anchor}"><a class="timestamp" href="#{anchor}">{timestamp}</a>{escape(text)}</p>')
  parts.append('</div></details></section>')
 parts.append('<p class="source">출처: HyResearchAgent/part3 · commit '+manifest['commit']+' · 확인 2026-10-26. 원문은 수정하지 않았으며 원음 대비 완전성은 미확인입니다.</p></main><script>function reveal(){const id=decodeURIComponent(location.hash.slice(1));const el=document.getElementById(id);if(!el)return;const detail=el.closest("details");if(detail)detail.open=true;requestAnimationFrame(()=>el.scrollIntoView());}addEventListener("hashchange",reveal);reveal();</script></body></html>')
-(ROOT/'transcripts.html').write_text('\n'.join(parts))
+write_html(ROOT/'transcripts.html', '\n'.join(parts))
 
 data=json.loads((ROOT/'practice/case-data.json').read_text())
 expected=json.loads((ROOT/'practice/expected-review.json').read_text())
@@ -50,5 +73,7 @@ for i,item in enumerate(expected['findings'],1):
 lab.append('<div class="button-row"><button class="button primary" type="submit">판정 확인</button><button class="button" type="button" id="reset-exercise">다시 해보기</button></div><div class="result" id="review-result" role="status" tabindex="-1"></div></form>')
 template=(ROOT/'src/index.html').read_text()
 index=re.sub(r'<!-- LAB:START -->.*?<!-- LAB:END -->','<!-- LAB:START -->\n'+''.join(lab)+'\n<!-- LAB:END -->',template,flags=re.S)
-(ROOT/'index.html').write_text(index)
+index=re.sub(r'<!-- PROJECT_CASES:START -->.*?<!-- PROJECT_CASES:END -->',lambda _: '<!-- PROJECT_CASES:START -->\n'+render(cases)+'\n<!-- PROJECT_CASES:END -->',index,flags=re.S)
+index=index.replace('<!-- PROJECT_CASE_COUNT -->', str(len(cases))+'개 사례' if cases else '확인 중')
+write_html(ROOT/'index.html', index)
 print('Built index.html and transcripts.html. Preserved 8 raw transcript hashes.')
