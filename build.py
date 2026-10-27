@@ -35,6 +35,9 @@ prompt_blocks = re.findall(r'^```text\n(.*?)^```', (ROOT/'practice/project-promp
 if len(prompt_blocks) != len(prompt_keys) or any(not block.strip() for block in prompt_blocks):
  parser.exit(1, '실습 프롬프트 3개와 선택 정리 요청 1개를 확인하세요.\n')
 template=(ROOT/'src/index.html').read_text()
+if template.count('<!-- COURSE_OVERVIEW -->') != 1:
+ parser.exit(1, '강의 개요 위치가 없거나 중복되었습니다.\n')
+template=template.replace('<!-- COURSE_OVERVIEW -->', (ROOT/'src/overview.html').read_text())
 for key, block in zip(prompt_keys, prompt_blocks):
  marker='<!-- PRACTICE_PROMPT:'+key+' -->'
  if template.count(marker) != 1:

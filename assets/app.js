@@ -7,7 +7,7 @@
   const sidebar = document.querySelector('.sidebar');
   const menu = document.querySelector('#menu');
   const scrim = document.querySelector('.scrim');
-  const remembered = {learn:'learn-roles',practice:'practice-start',projects:'projects-cases'};
+  const remembered = {overview:'overview-start',learn:'learn-roles',practice:'practice-start',projects:'projects-cases'};
   const syncSidebar = () => {sidebar.inert=matchMedia('(max-width:760px)').matches&&!sidebar.classList.contains('open');};
   const closeMenu = () => {sidebar.classList.remove('open');scrim.classList.remove('open');menu.setAttribute('aria-expanded','false');syncSidebar();};
   function route(focus = true) {
