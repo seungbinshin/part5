@@ -13,6 +13,13 @@
 
 핵심 경로에서는 reviewer만 새로 연습합니다. 문헌 수집, Skill 재생성, 실험, 긴 초안 생성을 반복하지 않습니다. 입력은 모두 합성이며 실제 Wiki의 연구 사실과 섞지 않습니다.
 
+<!-- PART5_REAL_SUBAGENTS_20261103 -->
+## 역할 계약과 실제 Agent 정의는 다릅니다
+
+위 표는 **역할 분담 계약**입니다. 이 문서를 쓰는 것만으로 Agent가 등록되지는 않습니다. Part 5 교육용 정의 9개는 [agent-definitions/](agent-definitions/)에, 설치·확인 절차는 [AGENT_SETUP.md](AGENT_SETUP.md)에 있습니다. Claude Code를 쓰는 경우 격리 사본의 `.claude/agents/`에 설치합니다.
+
+이번 교육용 정의는 읽기 전용이며 Main이 승인된 새 산출물만 기록합니다. 원전사의 일부 Agent 직접 쓰기 시연보다 보수적인 교육 구성이며, 독립 컨텍스트와 실제 호출 여부는 사용 도구의 실행 로그로 확인합니다.
+
 ## 인계와 한 명의 작성자
 
 리뷰어는 입력 버전, 읽은 경로, 근거 위치, 완료·미완료 사항과 사람이 결정할 항목을 보고합니다. Main은 [HANDOFF](HANDOFF.md)의 형식에 따라 `outputs/handoff.json`에 현재 보고서의 해시와 미해결 항목을 기록하고 함께 검사합니다. 여러 역할이 같은 `index`, `log`, `literature` 또는 JSON 저장소를 동시에 고치지 않습니다.

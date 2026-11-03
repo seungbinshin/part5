@@ -8,6 +8,13 @@
 
 아래는 작은 고정 자료로 먼저 익히고 싶을 때 선택하는 합성 연습입니다. 자기 프로젝트의 완료 검사와 별개입니다. [선택 합성 프롬프트](optional-agent-prompt.md)는 사본의 `llm_wiki/research/part5-lab/`에 예제를 추가하고 제공된 검수기로 확인합니다.
 
+<!-- PART5_REAL_SUBAGENTS_20261103 -->
+## 먼저: 실제 Agent 파일을 생성하세요
+
+[AGENT_SETUP.md](AGENT_SETUP.md)에 따라 Part 4의 기존 Skill을 재사용하면서 **1단계에서 네 연구 Agent를 설치**, **2단계에서 실제 Subagent 위임**, **3단계에서 다섯 독립 리뷰어를 추가 설치·호출**합니다. 격리 사본의 `.claude/agents/`에 총 9개 Markdown이 있어야 합니다. Claude Code가 아닌 도구는 해당 도구의 공식 등록 형식을 확인합니다.
+
+`project-prompts.md`의 세 요청은 학습자의 실제 연구 입력을 사용합니다. `upgrade_wiki.py`의 `part5-lab`은 고정된 선택 합성 예제이며 Agent 설치를 수행하지 않습니다. 단순 역할 표·프롬프트 사용만으로 독립 Subagent가 실행됐다고 보고하지 마세요.
+
 ## 선택 합성 예제의 전후 산출물
 
 | 단계 | 전 | 후 | 최소 확인 |

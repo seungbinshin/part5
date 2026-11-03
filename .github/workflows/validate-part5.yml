@@ -1,0 +1,41 @@
+name: Validate Part 5 course and agents
+
+on:
+  pull_request:
+    paths:
+      - "practice/**"
+      - "tests/**"
+      - "src/**"
+      - "docs/**"
+      - "README.md"
+      - "index.html"
+      - "transcripts.html"
+      - "build.py"
+      - ".github/workflows/validate-part5.yml"
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile Python
+        run: python -m compileall -q practice tests build.py
+      - name: New agent registration tests
+        run: python -m unittest discover -s tests -p 'test_agent_install.py' -v
+      - name: Existing project cases regression tests
+        run: python -m unittest discover -s tests -p 'test_project_cases.py' -v
+      - name: Existing synthetic review regression tests
+        run: python practice/smoke_test.py
+      - name: Build static pages, verify transcript hashes
+        run: python build.py --require-project-cases
+      - name: Confirm committed HTML matches build output
+        run: git diff --exit-code -- index.html transcripts.html
