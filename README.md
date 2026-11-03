@@ -27,6 +27,13 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 이후 `http://127.0.0.1:8000`으로 접속합니다. 다른 프로그램이 해당 포트를 사용하면 다른 포트를 선택합니다. 외부 공개 서버를 만들 필요는 없습니다.
 
+<!-- PART5_REAL_SUBAGENTS_20261103 -->
+## Part 5의 필수 실습: 실제 Subagent 생성과 위임
+
+Part 1~4에서는 Wiki·운영 규칙과 논문 읽기·실험 로그 Skill을 만듭니다. **Part 5에서 새로 배우는 것은 연구 Subagent 4개와 심사자 5개(총 9개)를 실제로 정의·등록·호출하는 방법**입니다. 이전 실습 프롬프트에는 이 등록 단계가 빠져 있었습니다. [Agent 생성·등록·검증 절차](practice/AGENT_SETUP.md)와 [파트별 학습 내용 대조](docs/part1-5-agent-audit.md)를 먼저 확인하세요.
+
+Claude Code에서 **프로젝트 Subagent**의 위치는 `.claude/agents/`이며 Part 4의 `.agents/skills/` 또는 `.claude/skills/`는 **Skill** 경로입니다. 기존 Skill을 바꾸지 마세요. 배포 자료를 내려받는 것만으로 실습 대상 Wiki에 Agent가 만들어지지는 않습니다. 격리 사본에 설치하고 실제 호출 증거까지 확인해야 합니다. `practice/upgrade_wiki.py`는 선택 합성 예제의 추가 도구이지 Agent 설치기가 아닙니다.
+
 ## 파일과 편집
 
 | 파일 | 내용 |
