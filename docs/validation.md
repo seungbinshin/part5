@@ -124,3 +124,16 @@ GitHub 저장소 게시와 웹 호스팅은 별개다. 이 저장소에는 Pages
 - 검수 공간 14를 종료했다. 기존 사용자 공간은 건드리지 않았다. Ego Lite 업데이트 안내는 있었지만 설치·보안 설정을 변경하지 않았다.
 
 화면: [개요 데스크톱](qa/part5-overview-desktop.png), [개요 모바일](qa/part5-overview-mobile.png), [이전 파트 비교](qa/part5-overview-comparison-mobile.png). 원강의의 실행·연구 효과를 재현한 검사는 아니다.
+
+<!-- PART5_REAL_SUBAGENTS_20261103 -->
+## 2026-11-03 · Subagent 등록·호출 실습 개편
+
+Part 1~4의 Wiki·규칙·Skill 실습과 Part 5 원전사문 8개를 대조했습니다. Part 5의 고유 목표인 **핵심 연구 역할 4개와 독립 심사자 5개**를 실제 등록하는 단계를 복원했습니다.
+
+- `practice/agent-definitions/`: 9개 Claude Code용 Agent 정의
+- `practice/install_agents.py`: 격리 사본에만 설치, 기존 파일 충돌 거부, 반복 설치·해시 검증
+- `tests/test_agent_install.py`: 계획 무변경, 확인 표시, 4+5 설치, 반복 설치, 내용 충돌 보호, 변조 감지, 심볼릭 링크 거부, 중도 오류 복구를 검사하는 8개 테스트
+- `practice/project-prompts.md`: 첫 단계에서 핵심 4개 등록, 둘째에서 실제 위임, 셋째에서 심사자 5개 등록 및 개별 검토
+- `src/index.html`과 `index.html`: 같은 실습 안내를 강의 화면에 반영
+
+확인 범위: 수정 패키지의 Python 단위 테스트 8개가 로컬에서 통과했습니다. **기본 저장소의 전체 테스트·정적 HTML 빌드·실제 Claude Code Subagent 호출은 이 기록과 구분하며, 수행 결과가 확인되지 않으면 통과로 기재하지 않습니다.** 역할을 독립 컨텍스트에서 호출했는지와 서로의 리뷰를 읽지 않았는지는 수강생 실행 환경에서 별도 확인합니다. 원전사문과 기존 선택 합성 `part5-lab`의 입력·검사기는 변경하지 않았습니다.
